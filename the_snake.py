@@ -5,7 +5,7 @@ import random
 # КОНСТАНТЫ
 # Размеры поля и сетки:
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480       # Размер окна
-CENTRAL_POS = ((SCREEN_WIDTH // 2), (SCREEN_HEIGHT // 2))  # Центральная точка
+CENTRAL_POS = ((SCREEN_WIDTH // 2), (SCREEN_HEIGHT // 2))  # Центр
 GRID_SIZE = 20                               # Размер одной клетки
 GRID_WIDTH = SCREEN_WIDTH // GRID_SIZE       # Ширина окна в клетках (32)
 GRID_HEIGHT = SCREEN_HEIGHT // GRID_SIZE     # Высота окна в клетках (24)
