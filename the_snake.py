@@ -41,7 +41,7 @@ class GameObject:
     они могли использовать функциональность и расширять её.
     """
 
-    def __init__(self, position, body_color):
+    def __init__(self, position=CENTRAL_POS, body_color=None):
         self.position = position
         self.body_color = body_color
 
