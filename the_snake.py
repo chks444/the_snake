@@ -169,7 +169,6 @@ def main():
             screen.fill(BOARD_BACKGROUND_COLOR)
             snake.reset()
 
-        screen.fill(BOARD_BACKGROUND_COLOR)
         snake.draw()
         apple.draw()
         pg.display.update()
