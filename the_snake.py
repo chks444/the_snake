@@ -92,6 +92,7 @@ class Snake(GameObject):
         self.length = 1
         self.positions = [CENTRAL_POS]
         self.position = self.positions[0]
+        self.last_tail_position = None
         self.last = None
         self.direction = RIGHT
         self.next_direction = None
@@ -109,6 +110,10 @@ class Snake(GameObject):
         dir_x, dir_y = self.direction
         new_head_pos = ((head_x + dir_x * GRID_SIZE) % SCREEN_WIDTH,
                         (head_y + dir_y * GRID_SIZE) % SCREEN_HEIGHT)
+
+        if len(self.positions) >= self.length:
+            self.last_tail_position = self.positions[-1]
+
         self.positions.insert(0, new_head_pos)
 
         if len(self.positions) > self.length:
@@ -116,9 +121,10 @@ class Snake(GameObject):
 
     def draw(self):
         """Метод draw класса Snake."""
-        # Затираем хвост если не было съедено яблоко
-        if self.length > 1:
-            tail_rect = pg.Rect(self.positions[-1], (GRID_SIZE, GRID_SIZE))
+        # Если есть запомненная позиция хвоста, затираем её
+        if self.last_tail_position:
+            tail_rect = pg.Rect(self.last_tail_position,
+                                (GRID_SIZE, GRID_SIZE))
             pg.draw.rect(screen, BOARD_BACKGROUND_COLOR, tail_rect)
 
         # Отрисовываем тело змейки
@@ -149,6 +155,7 @@ def main():
     """Основной игровой цикл"""
     snake = Snake()
     apple = Apple(snake.positions)
+    screen.fill(BOARD_BACKGROUND_COLOR)
 
     while True:
         handle_keys(snake)
@@ -159,6 +166,7 @@ def main():
             snake.length += 1
             apple.randomize_position(snake.positions)
         elif snake.get_head_position() in snake.positions[1:]:
+            screen.fill(BOARD_BACKGROUND_COLOR)
             snake.reset()
 
         screen.fill(BOARD_BACKGROUND_COLOR)
